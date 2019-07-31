@@ -22,6 +22,10 @@ LOGFILE="/tmp/template.log"
 WORK_PATH=""
 TMP_PATH="/tmp"
 
+# スクリプト格納ディレクトリ
+SCRIPT_HOME="$(cd $(dirname $0) && pwd)"
+
+
 # 関数表示エリア
 ## 多重機能チェック
 ### argument：[Name],  return value: 0->True, -1->False
@@ -78,8 +82,8 @@ ARG2=$2
 # コマンド存在チェック
 _command_list=(
     "find"
-    "wget"
-    "ss"
+#    "wget"
+#    "ss"
 )
 for _command in "${_command_list[@]}" ; do
   which ${_command}
@@ -116,6 +120,7 @@ PARAM2=`check_path "/tmp"`
 output_log ${LOGFILE}  "File check PARAM1=${PARAM1}" 
 
 ## while文
+## while option -d delimiter
 ### ファイルパス一覧
 #DATAFILE=***.txt
 #while read line ; do
@@ -124,8 +129,12 @@ output_log ${LOGFILE}  "File check PARAM1=${PARAM1}"
 
 ## for文
 ### 連番によるループ
+count=0
 for _i in {1..3};do
+  # bash インクリメント
+  _count=$((++count))
   output_log ${LOGFILE} "Num loop i=${_i}" 
+  output_log ${LOGFILE} "_count loop _count=${_count}" 
 done
 
 ### 引数ループ
