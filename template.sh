@@ -42,27 +42,9 @@ SCRIPT_HOME="$(cd $(dirname $0) && pwd)"
 ### argument：[File path][Message][I|W|E|R],  return value: Log file.
 ### [I|W|E|R]  R = "refresh". *Record a new log.
 output_log(){
-    _filepath=$1
-    _message=$2
-    _option=$3
-    if [ "${_option}" = "W" ];then
-        _option_message="Warn"
-    elif [ "${_option}" = "E" ];then
-        _option_message="Error"
-    else 
-        _option_message="Info"
-    fi
-
-    if [ "${LOG_OUTPUT_OPTION}" = "y" ];then
-        if [ "${_option}" = "R" ];then
-            echo -e "[`date "+%Y/%m/%d-%H:%M:%S"]`[${_option_message}] ${_message} " > ${_filepath} 2>&1
-        else
-            echo -e "[`date "+%Y/%m/%d-%H:%M:%S"]`[${_option_message}] ${_message} " >> ${_filepath} 2>&1
-        fi
-    else
-      echo -e "[`date "+%Y/%m/%d-%H:%M:%S"]`[${_option_message}] ${_message} "
-    fi
-    
+_message=$1; _option=$2; _write_detail_log=$3; _option_message="Info"; [ "${_option}" = "W" ] && _option_message="Warn"; [ "${_option}" = "E" ] && _option_message="Error"; [ ! "${_write_detail_log}" = "y" ] && _write_detail_log="n"
+_output_message="[`date "+%Y/%m/%d-%H:%M:%S"]`[${_option_message}] ${_message} "
+[ "${_option}" = "R" ] && : > ${LOGFILE}; [ "${LOG_OUTPUT_OPTION}" = "y" ] && echo -e ${_output_message} >> ${LOGFILE} 2>&1 || echo -e ${_output_message}
 }
 
 ## ファイル・ディレクトリ存在チェック
