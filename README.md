@@ -1,1 +1,1 @@
-This repository is template of Bash Code.
+Template of Bash Code.
