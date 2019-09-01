@@ -25,7 +25,6 @@ TMP_PATH="/tmp"
 # スクリプト格納ディレクトリ
 SCRIPT_HOME="$(cd $(dirname $0) && pwd)"
 
-
 # 関数表示エリア
 ## 多重機能チェック
 ### argument：[Name],  return value: 0->True, -1->False
