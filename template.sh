@@ -85,6 +85,7 @@ output_log ${LOGFILE} "Arg1=[${ARG1}], Arg2=[${ARG2}]"
 ### >	-gt
 ### ≦	-le
 ### ≧	-ge
+#
 
 #文字比較
 if [ "${_option}" = "W" ];then
